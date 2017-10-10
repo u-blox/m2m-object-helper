@@ -372,8 +372,7 @@ protected:
 
     /** Set the value of a given resource in an object.
      *
-     * @param value            pointer to the value of the
-     *                         resource to set.
+     * @param value            the value of the resource to set.
      * @param resourceNumber   the number of the resource whose
      *                         value is to be set.
      * @param wantedInstance   the resource instance if there
@@ -387,8 +386,7 @@ protected:
 
     /** Set the value of a given resource in an object.
      *
-     * @param value            pointer to the value of the
-     *                         resource to set.
+     * @param value            the value of the resource to set.
      * @param resourceNumber   the number of the resource whose
      *                         value is to be set.
      * @param wantedInstance   the resource instance if there
@@ -402,8 +400,7 @@ protected:
 
     /** Set the value of a given resource in an object.
      *
-     * @param value            pointer to the value of the
-     *                         resource to set.
+     * @param value            the value of the resource to set.
      * @param resourceNumber   the number of the resource whose
      *                         value is to be set.
      * @param wantedInstance   the resource instance if there
@@ -417,8 +414,7 @@ protected:
 
     /** Set the value of a given resource in an object.
      *
-     * @param value            pointer to the value of the
-     *                         resource to set.
+     * @param value            the value of the resource to set.
      * @param resourceNumber   the number of the resource whose
      *                         value is to be set.
      * @param wantedInstance   the resource instance if there
@@ -432,8 +428,7 @@ protected:
 
     /** Set the value of a given resource in an object.
      *
-     * @param value            pointer to the value of the
-     *                         resource to set.
+     * @param value            the value of the resource to set.
      * @param resourceNumber   the number of the resource whose
      *                         value is to be set.
      * @param wantedInstance   the resource instance if there
@@ -591,19 +586,19 @@ private:
                           const char *resourceNumber,
                           int wantedInstance = -1);
 
-    /** The definition for this object.
+    /** A pointer to the definition for this object.
      */
     const DefObject *_defObject;
 
-    /** The LWM2M object.
+    /** A pointer to the LWM2M object.
      */
     M2MObject *_object;
 
-    /** The value updated callback set to NULL where there
-     * is none.  Set this if the object includes a writable
-     * object and you want to know when it has been written-to
-     * by the server so that you can update the local values
-     * in your code as appropriate.
+    /** The value updated callback, may be NULL.  This should be
+     * set if the object includes a writable resource and you
+     * want to know when it has been written-to by the server
+     * (so that you can update the local values in your code
+     * as appropriate).
      */
     value_updated_callback _valueUpdatedCallback;
 };

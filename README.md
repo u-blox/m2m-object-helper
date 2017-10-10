@@ -146,7 +146,7 @@ For instance, if your temperature sensor has a `resetMinMax` function, your cons
 MyObject::MyObject(bool debugOn,
                    Callback<bool(Temperature *)> getCallback)
                    Callback<void(void)> resetMinMaxCallback,
-                  int64_t aFixedValueThing)
+                   int64_t aFixedValueThing)
          :M2MObjectHelper(debugOn, &_defObject)
 {
     _getCallback = getCallback;
@@ -171,8 +171,7 @@ void MyObject::executeFunction (void *parameter)
 
 ```
 if (resetMinMaxCallback) {
-    setExecuteCallback(execute_callback(this, &MyObject::executeFunction),
-                       "5605"));
+    setExecuteCallback(execute_callback(this, &MyObject::executeFunction), "5605"));
 }
 ```
 
@@ -214,4 +213,4 @@ TemperatureIndoor *indoor = new TemperatureIndoor(true,
 
 Clearing Up
 -----------
-When clearing objects up, always delete them BEFORE Mbed Client/Cloud Client itself is deleted (since their destructors do things inside Mbed Client/Cloud Client).
+When clearing objects up, always delete them BEFORE Mbed Client/Cloud Client itself is deleted; their destructors do things inside Mbed Client/Cloud Client.
