@@ -24,7 +24,7 @@
  *
  * LWM2M objects are made up of resources.  Resources may be readable
  * but static (so GET is allowed by the server), readable and
- * dynamic (GET is allowed by OBSERVABLE is also set), writable (PUT is
+ * dynamic (GET is allowed and OBSERVABLE is also set), writable (PUT is
  * also allowed by the server) or executable (POST is allowed by the
  * server).  Resources are the leaves if your object is the tree.
  *

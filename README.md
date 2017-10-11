@@ -2,7 +2,7 @@ Introduction
 ============
 This class helps with constructing LWM2M objects for use with Mbed Client or Mbed Cloud Client.
 
-LWM2M objects are made up of resources.  Resources may be readable but static (so GET is allowed by the server), readable and dynamic (GET is allowed by OBSERVABLE is also set), writable (PUT is also allowed by the server) or executable (POST is allowed by the server).  Resources are the leaves if your object is the tree.
+LWM2M objects are made up of resources.  Resources may be readable but static (so GET is allowed by the server), readable and dynamic (GET is allowed and OBSERVABLE is also set), writable (PUT is also allowed by the server) or executable (POST is allowed by the server).  Resources are the leaves if your object is the tree.
 
 Resources and objects are identified by an ID string, which will be a number, e.g. "1234".  The possible resources are standardised, see: http://www.openmobilealliance.org/wp/OMNA/LwM2M/LwM2MRegistry.html and https://github.com/IPSO-Alliance/pub/tree/master/reg for reference.
 
