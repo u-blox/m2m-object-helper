@@ -39,7 +39,6 @@ So your complete object definition might look something like this:
 ```
 class MyObject : public M2MObjectHelper {
 public:
-
     MyObject(bool initialValue);
     ~MyObject();
 protected:
@@ -92,7 +91,7 @@ MyObject::MyObject(Callback<void(bool)> setCallback,
     ...
 ```
 
-The `setCallback()` function in your application might look something like this:
+The `setCallback()` function in your application code might look something like this:
 
 ```
 void setPowerOnOff(bool powerIsOn)
@@ -137,7 +136,7 @@ MyObject::MyObject(Callback<bool(Temperature *)> getCallback,
     ...
 ```
 
-...your `getCallback()` function might look something like:
+...the `getCallback()` function in your application code might look something like:
 
 ```
 bool getTemperatureData(MyObject::Temperature *data)

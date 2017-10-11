@@ -68,7 +68,6 @@
  *
  * class MyObject : public M2MObjectHelper {
  * public:
- *
  *     MyObject(bool initialValue);
  *     ~MyObject();
  * protected:
@@ -118,7 +117,7 @@
  *     setResourceValue(initialValue, "5850");
  *     ...
  *
- * The setCallback() function in your application might look something
+ * The setCallback() function in your application code might look something
  * like this:
  *
  * void setPowerOnOff(bool powerIsOn)
@@ -175,7 +174,8 @@
  *     setResourceValue(aFixedValueThing, "5603");
  *     ...
  *
- * ...your getCallback() function might look something like:
+ * ...your getCallback() function in your application code might look
+ * something like:
  *
  * bool getTemperatureData(MyObject::Temperature *data)
  * {
