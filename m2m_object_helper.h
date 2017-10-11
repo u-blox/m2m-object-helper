@@ -20,6 +20,8 @@
 /** This class helps with constructing LWM2M objects for use with mbed
  * client or mbed cloud client.
  *
+ * OVERVIEW
+ *
  * LWM2M objects are made up of resources.  Resources may be readable
  * but static (so GET is allowed by the server), readable and
  * dynamic (GET is allowed by OBSERVABLE is also set), writable (PUT is
@@ -39,6 +41,8 @@
  * and upwards).  Generally speaking, objects tend to consist of
  * readable resources or writable resources but not both; however this
  * is not a requirement.
+ *
+ * USAGE
  *
  * This class makes it easy to create LWM2M objects, using an object
  * definition structure and a few helper functions.
@@ -160,7 +164,7 @@
  *   of your class to be called either periodically or when a value has
  *   changed.  This class provides a default implementation of
  *   updateObservableResources() (which does nothing) so it is always safe
- *   to call this method on any LWM2M object.
+ *   to call this method on any object.
  *
  * For instance, if your object were a temperature sensor your getCallback()
  * would take as a parameter a pointer to a structure of your creation, e.g.:

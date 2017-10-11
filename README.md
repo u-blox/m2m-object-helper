@@ -120,8 +120,8 @@ Creating Objects With Observable (i.e. Changing) Resources
 If your object includes one or more observable resources, i.e. ones which can change from their initial value, then you will need to do three things:
 
 - add a `getCallback()` function pointer, a callback capable of retrieving the new values from your application code so that the values in the LWM2M object can be updated,
-- your class will need to include an `updateObservableResources()` method that maps the values returned in getCallback() to the LWM2M object,
-- your application will then arrange for the `updateObservableResources()` of your class to be called either periodically or when a value has changed.  This class provides a default implementation of `updateObservableResources()` (which does nothing) so it is always safe to call this method on any LWM2M object.
+- your class will need to include an `updateObservableResources()` method that maps the values returned in `getCallback()` to the LWM2M object,
+- your application will then arrange for the `updateObservableResources()` of your class to be called either periodically or when a value has changed.  This class provides a default implementation of `updateObservableResources()` (which does nothing) so it is always safe to call this method on any object.
 
 For instance, if your object were a temperature sensor your `getCallback()` would take as a parameter a pointer to a structure of your creation, e.g.:
 
