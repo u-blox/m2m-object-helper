@@ -483,9 +483,10 @@ M2MObject *M2MObjectHelper::getObject()
  **********************************************************************/
 
 // Constructor (private so that this can only be sub-classed).
-M2MObjectHelper::M2MObjectHelper(bool debugOn, const DefObject *defObject,
+M2MObjectHelper::M2MObjectHelper(const DefObject *defObject,
                                  value_updated_callback valueUpdatedCallback,
-                                 M2MObject *object)
+                                 M2MObject *object,
+                                 bool debugOn)
 {
     _debugOn = debugOn;
     _defObject = defObject;

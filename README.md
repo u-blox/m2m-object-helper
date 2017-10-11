@@ -26,14 +26,50 @@ const M2MObjectHelper::DefObject MyObject::_defObject =
 You will then pass a pointer to this struct into the constructor of this class. For example, if an object contains a single resource which is a Boolean value, it might look something like this:
 
 ```
-MyObject::MyObject(bool debugOn,
-                   bool initialValue)
-         :M2MObjectHelper(debugOn, &_defObject)
+MyObject::MyObject(bool initialValue)
+         :M2MObjectHelper(&_defObject)
 {
     makeObject();
     setResourceValue(initialValue, "5850");
     ...
 ```
+
+So your complete object definition might look something like this:
+
+```
+class MyObject : public M2MObjectHelper {
+public:
+
+    MyObject(bool initialValue);
+    ~MyObject();
+protected:
+    static const DefObject _defObject;
+};
+```
+
+...and the implementation would be:
+
+```
+const M2MObjectHelper::DefObject MyObject::_defObject =
+    {0, "3312", 1,
+        -1, "5850", "on/off", M2MResourceBase::BOOLEAN, false, M2MBase::GET_PUT_ALLOWED, NULL
+    };
+
+MyObject::MyObject(bool initialValue)
+         :M2MObjectHelper(&_defObject)
+{
+    makeObject();
+    setResourceValue(initialValue, "5850"));
+}
+
+MyObject::~MyObject()
+{
+}
+```
+
+For complete examples of the implementation of several different types of LWM2M objects, take a look at the files `ioc_m2m.h` and `ioc_m2m.cpp` in this repo:
+
+https://github.com/u-blox/ioc-client
 
 Creating Objects With Writable Resources
 ----------------------------------------
@@ -45,11 +81,10 @@ If your object includes a writable resource, i.e. one where PUT is allowed, then
 For instance, if your object is a power on/off switch, your `setCallback()` might take as a parameter the Boolean state of the switch, e.g.
 
 ```
-MyObject::MyObject(bool debugOn,
-                   Callback<void(bool)> setCallback,
+MyObject::MyObject(Callback<void(bool)> setCallback,
                    bool initialValue)
-         :M2MObjectHelper(debugOn, &_defObject,
-                           value_updated_callback(this, &MyObject::objectUpdated))
+         :M2MObjectHelper(&_defObject,
+                          value_updated_callback(this, &MyObject::objectUpdated))
 {
     _setCallback = setCallback;
     makeObject();
@@ -92,10 +127,9 @@ If your object includes one or more observable resources, i.e. ones which can ch
 For instance, if your object were a temperature sensor your `getCallback()` would take as a parameter a pointer to a structure of your creation, e.g.:
 
 ```
-MyObject::MyObject(bool debugOn,
-                   Callback<bool(Temperature *)> getCallback,
+MyObject::MyObject(Callback<bool(Temperature *)> getCallback,
                    int64_t aFixedValueThing)
-         :M2MObjectHelper(debugOn, &_defObject)
+         :M2MObjectHelper(&_defObject)
 {
     _getCallback = getCallback;
     makeObject();
@@ -143,11 +177,10 @@ If your object includes an executable resource, you will need to do three things
 For instance, if your temperature sensor has a `resetMinMax` function, your constructor might look like this:
 
 ```
-MyObject::MyObject(bool debugOn,
-                   Callback<bool(Temperature *)> getCallback)
+MyObject::MyObject(Callback<bool(Temperature *)> getCallback)
                    Callback<void(void)> resetMinMaxCallback,
                    int64_t aFixedValueThing)
-         :M2MObjectHelper(debugOn, &_defObject)
+         :M2MObjectHelper(&_defObject)
 {
     _getCallback = getCallback;
     _resetMinMaxCallback = resetMinMaxCallback;
@@ -182,18 +215,16 @@ If you need to create multiple objects with the same ID string, e.g. an indoor a
 For instance, the constructors might look as follows:
 
 ```
-TemperatureOutdoor::TemperatureOutdoor(bool debugOn,
-                                       Callback<bool(Temperature *)> getCallback,
+TemperatureOutdoor::TemperatureOutdoor(Callback<bool(Temperature *)> getCallback,
                                        M2MObject *object)
-                   :M2MObjectHelper(debugOn, &_defObject, NULL, object)
+                   :M2MObjectHelper(&_defObject, NULL, object)
 {
     ...
 }
 
-TemperatureIndoor::TemperatureIndoor(bool debugOn,
-                                     Callback<bool(Temperature *)> getCallback,
+TemperatureIndoor::TemperatureIndoor(Callback<bool(Temperature *)> getCallback,
                                      M2MObject *object)
-                  :M2MObjectHelper(debugOn, &_defObject, NULL, object)
+                  :M2MObjectHelper(&_defObject, NULL, object)
 {
     ...
 }
